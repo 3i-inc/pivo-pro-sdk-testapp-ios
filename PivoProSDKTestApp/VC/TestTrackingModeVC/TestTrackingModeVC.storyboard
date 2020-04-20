@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kwU-PC-MfP">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Test Tracking ModeVC-->
+        <scene sceneID="U8E-fu-rha">
+            <objects>
+                <viewController id="kwU-PC-MfP" customClass="TestTrackingModeVC" customModule="PivoProSDKTestApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fy1-Iz-ZN8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="X1a-wq-q0R">
+                                <rect key="frame" x="20" y="44" width="374" height="798"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="K9o-cI-u4E">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="oe8-vf-Z2N"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="Object"/>
+                                            <segment title="Human"/>
+                                            <segment title="Horse"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="didTrackingTypeOptionChanged:" destination="kwU-PC-MfP" eventType="valueChanged" id="5Jc-hJ-06l"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VHO-DN-HUD">
+                                        <rect key="frame" x="0.0" y="64" width="374" height="670"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ltl-rs-XrD">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="670"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="ltl-rs-XrD" secondAttribute="trailing" id="Enm-5r-Tu9"/>
+                                            <constraint firstItem="ltl-rs-XrD" firstAttribute="top" secondItem="VHO-DN-HUD" secondAttribute="top" id="KnH-Rk-HcW"/>
+                                            <constraint firstAttribute="bottom" secondItem="ltl-rs-XrD" secondAttribute="bottom" id="kQm-H5-Nu0"/>
+                                            <constraint firstItem="ltl-rs-XrD" firstAttribute="leading" secondItem="VHO-DN-HUD" secondAttribute="leading" id="ur1-iK-wK5"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nmw-31-pix">
+                                        <rect key="frame" x="0.0" y="754" width="374" height="44"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="2oc-nX-OFf"/>
+                                        </constraints>
+                                        <state key="normal" title="Pick Image">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="didPickImageButtonClicked:" destination="kwU-PC-MfP" eventType="touchUpInside" id="8Nk-bt-bR0"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="X1a-wq-q0R" firstAttribute="leading" secondItem="cKo-5A-NqY" secondAttribute="leading" constant="20" id="2ca-Wv-ykG"/>
+                            <constraint firstItem="X1a-wq-q0R" firstAttribute="top" secondItem="cKo-5A-NqY" secondAttribute="top" id="OH9-Rk-zZM"/>
+                            <constraint firstItem="cKo-5A-NqY" firstAttribute="trailing" secondItem="X1a-wq-q0R" secondAttribute="trailing" constant="20" id="jpu-ou-int"/>
+                            <constraint firstItem="cKo-5A-NqY" firstAttribute="bottom" secondItem="X1a-wq-q0R" secondAttribute="bottom" constant="20" id="rHz-fH-xbR"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="cKo-5A-NqY"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="ltl-rs-XrD" id="xYv-xI-xME"/>
+                        <outlet property="imageViewContainer" destination="VHO-DN-HUD" id="aDb-ZO-BNK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ajO-ut-Sul" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="171.01449275362319" y="150"/>
+        </scene>
+    </scenes>
+</document>

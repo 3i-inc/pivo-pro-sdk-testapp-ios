@@ -1,0 +1,16 @@
+PODS:
+  - PivoProSDK (0.0.1)
+
+DEPENDENCIES:
+  - PivoProSDK
+
+SPEC REPOS:
+  trunk:
+    - PivoProSDK
+
+SPEC CHECKSUMS:
+  PivoProSDK: 4e707bcf1e1f853066b169a3901c7c466b6902a7
+
+PODFILE CHECKSUM: b7dcfbf8ee75bad83d8be1f764ecee474070c0c9
+
+COCOAPODS: 1.9.1
