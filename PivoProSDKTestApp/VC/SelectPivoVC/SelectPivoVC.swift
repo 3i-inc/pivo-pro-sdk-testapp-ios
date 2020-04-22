@@ -85,7 +85,6 @@ class SelectPivoVC: UIViewController, UIImagePickerControllerDelegate {
   }
   
   @IBAction func scanForBluetooth(_ sender: UIBarButtonItem) {
-    self.view.isUserInteractionEnabled = true
     scanBluetoothDevice()
   }
   
@@ -192,13 +191,12 @@ extension SelectPivoVC: PivoConnectionDelegate {
     isConnecting = false
     tableView.reloadData()
     handleRotatorConnected()
+    view.isUserInteractionEnabled = true
   }
   
   func pivoConnection(didConnectionFailed id: String) {
     isConnecting = false
-    DispatchQueue.main.async {
-      self.view.isUserInteractionEnabled = true
-    }
+    view.isUserInteractionEnabled = true
     let alertController = UIAlertController(title: "Connection Failed",
                                             message: "Failed to connect. Do you want to try again?",
                                             preferredStyle: UIAlertController.Style.alert)

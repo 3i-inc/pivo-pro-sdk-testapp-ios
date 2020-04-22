@@ -17,4 +17,5 @@ FOUNDATION_EXPORT const unsigned char PivoProSDKVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <PivoProSDK/PublicHeader.h>
 #import "NSData+SHA.h"
 #import "KCFTrackerWrapper.h"
+#import "AuthWrapper.h"
 
