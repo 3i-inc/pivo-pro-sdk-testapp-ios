@@ -22,7 +22,7 @@ class ControlPivoVC: UIViewController {
   @IBOutlet weak var tfAngle: UITextField!
   @IBOutlet weak var buttonSpeed: UIButton!
   
-  private lazy var pivoSDK = PivoProSDK.shared
+  private lazy var pivoSDK = PivoSDK.shared
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -32,11 +32,13 @@ class ControlPivoVC: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     pivoSDK.addDelegate(self)
+    setPivoFastestSpeed()
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     pivoSDK.removeDelegate(self)
+    setPivoFastestSpeed()
   }
   
   private func setupView() {
@@ -44,22 +46,41 @@ class ControlPivoVC: UIViewController {
     guard supportedSpeeds.count > 0 else { return }
     let maxSpeed = supportedSpeeds[0]
     buttonSpeed.setTitle("\(maxSpeed) s/r", for: .normal)
-    pivoSDK.setFastestSpeed()
+    setPivoFastestSpeed()
     
     scrollView.keyboardDismissMode = .onDrag
   }
   
+  private func setPivoFastestSpeed() {
+    pivoSDK.setFastestSpeed()
+  }
+  
   @IBAction func didRotateLeftByDegreeButtonClicked(_ sender: Any) {
     resignResponder()
-    if let angleStr = tfAngle.text, let angle = Int(angleStr) {
+    if let angleStr = tfAngle.text, var angle = Int(angleStr) {
+      angle = angle > 360 ? 360 : angle
+      tfAngle.text = "\(angle)"
       pivoSDK.turnLeft(angle: angle)
+      do {
+        try pivoSDK.turnLeftWithFeedback(angle: angle)
+      }
+      catch {
+        pivoSDK.turnLeft(angle: angle)
+      }
     }
   }
   
   @IBAction func didRotateRightByDegreeButtonClicked(_ sender: Any) {
     resignResponder()
-    if let angleStr = tfAngle.text, let angle = Int(angleStr) {
-      pivoSDK.turnRight(angle: angle)
+    if let angleStr = tfAngle.text, var angle = Int(angleStr) {
+      angle = angle > 360 ? 360 : angle
+      tfAngle.text = "\(angle)"
+      do {
+        try pivoSDK.turnRightWithFeedback(angle: angle)
+      }
+      catch {
+        pivoSDK.turnRight(angle: angle)
+      }
     }
   }
   
@@ -105,17 +126,23 @@ class ControlPivoVC: UIViewController {
     navigationController?.popViewController(animated: true)
   }
   
-  @IBAction func didTestTrackingModeButtonClicked(_ sender: Any) {
-    let trackingMethods = pivoSDK.getSupportedTrackingModes()
-    print(trackingMethods)
-    if let vc = TestTrackingModeVC.storyboardInstance() {
+  @IBAction func didCameraTrackingButtonClicked(_ sender: UIButton) {
+    if let vc = TrackingVC.storyboardInstance() {
       navigationController?.pushViewController(vc, animated: true)
     }
   }
   
-  @IBAction func didCameraTrackingButtonClicked(_ sender: UIButton) {
-    if let vc = TrackingVC.storyboardInstance() {
-      navigationController?.pushViewController(vc, animated: true)
+  @IBAction func didToggleByPassRCChanged(_ sender: UISwitch) {
+    do {
+      guard try pivoSDK.isByPassRemoteControllerSupported() else {
+        return
+      }
+      
+      sender.isOn ? pivoSDK.turnOnByPassRemoteController() : pivoSDK.turnOffBypassRemoteController()
+      sender.isOn ? pivoConnectionByPassRemoteControllerOn() : pivoConnectionByPassRemoteControllerOff()
+    }
+    catch {
+      print(error)
     }
   }
   
@@ -176,22 +203,46 @@ extension ControlPivoVC {
   }
 }
 
-extension ControlPivoVC: PivoConnectionDelegate {
+extension ControlPivoVC: PodConnectionDelegate {
   
   func pivoConnectionDidRotate() {
-    labelCommand.text = "ROTATED"
+    DispatchQueue.main.async { [weak self] in
+      self?.labelCommand.text = "ROTATED"
+    }
   }
   
-  func pivoConnection(remoteControlerCommandReceived command: PivoEvent) {
-    labelCommand.text = "\(command)"
+  func pivoConnection(remoteControlerCommandReceived command: PodResponse) {
+    DispatchQueue.main.async { [weak self] in
+      self?.labelCommand.text = "\(command)"
+    }
   }
   
-  func pivoConnection(batteryLevel: Int) {
-    labelBatteryLevel.text = "Battery Level: \(batteryLevel)%"
+  func pivoConnectionByPassRemoteControllerOn() {
+    DispatchQueue.main.async { [weak self] in
+      self?.labelCommand.text = "By Pass Remote Controller On"
+    }
   }
   
-  func pivoConnection(didDisconnect id: String) {
-    navigationController?.popViewController(animated: true)
+  func pivoConnectionByPassRemoteControllerOff() {
+    DispatchQueue.main.async { [weak self] in
+      self?.labelCommand.text = "By Pass Remote Controller Off"
+    }
+  }
+  
+  func pivoBatteryUpdate(device: BluetoothDevice) {
+    DispatchQueue.main.async { [weak self] in
+      self?.labelBatteryLevel.text = "Battery Level: \(device.batteryLevel)%"
+    }
+  }
+  
+  func pivoConnection(didDisconnect device: BluetoothDevice) {
+    DispatchQueue.main.async { [weak self] in
+      self?.navigationController?.popViewController(animated: true)
+    }
+  }
+  
+  func pivoConnectionBluetoothPermissionDenied() {
+    print("Permission denied")
   }
   
 }

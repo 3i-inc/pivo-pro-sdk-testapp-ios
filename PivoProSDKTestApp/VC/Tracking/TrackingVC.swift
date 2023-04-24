@@ -31,7 +31,7 @@ class TrackingVC: UIViewController {
       updateTrackingStateButtonText()
     }
   }
-  private var pivoSDK = PivoProSDK.shared
+  private var pivoSDK = PivoSDK.shared
   private var trackingType: TrackingType = .object
   
   private var trackingViews: [UIView] = []
@@ -75,6 +75,15 @@ class TrackingVC: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     setupViewModel()
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    stopTracking()
+  }
+  
+  private func stopTracking() {
+    viewModel.stopTracking()
   }
   
   private func setupViewModel() {
@@ -190,10 +199,6 @@ class TrackingVC: UIViewController {
   
   @IBAction func didStartTrackingButtonClicked(_ sender: Any) {
     viewModel.handleStartButtonClicked()
-  }
-  
-  @IBAction func didSaveButtonClicked(_ sender: Any) {
-    viewModel.handleSaveButtonClicked()
   }
   
   private func updateTrackingStateButtonText() {

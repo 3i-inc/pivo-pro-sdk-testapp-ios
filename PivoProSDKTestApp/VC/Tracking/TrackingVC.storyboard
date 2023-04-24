@@ -25,7 +25,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Draw bounding box to start object tracking" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BuF-KZ-Ehw">
-                                <rect key="frame" x="44" y="432.5" width="326" height="41"/>
+                                <rect key="frame" x="44" y="402.5" width="326" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -41,26 +41,21 @@
                                     <action selector="didFlipCameraButtonClicked:" destination="JYK-4h-vC0" eventType="touchUpInside" id="zV6-MN-Mj6"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O6g-Uj-Nhm">
-                                <rect key="frame" x="350" y="44" width="44" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="DB1-52-XZy"/>
-                                    <constraint firstAttribute="width" constant="44" id="Egc-8w-BYw"/>
-                                </constraints>
-                                <state key="normal" title="Save"/>
-                                <connections>
-                                    <action selector="didSaveButtonClicked:" destination="JYK-4h-vC0" eventType="touchUpInside" id="rxB-1s-Uaj"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u6r-Pg-LqI">
-                                <rect key="frame" x="147" y="672" width="120" height="60"/>
+                                <rect key="frame" x="137" y="692" width="140" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="2la-dO-22b"/>
-                                    <constraint firstAttribute="height" constant="60" id="6uC-j5-kw8"/>
+                                    <constraint firstAttribute="width" constant="140" id="2la-dO-22b"/>
+                                    <constraint firstAttribute="height" constant="40" id="6uC-j5-kw8"/>
                                 </constraints>
                                 <state key="normal" title="Start Tracking">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="didStartTrackingButtonClicked:" destination="JYK-4h-vC0" eventType="touchUpInside" id="7u0-v4-hJ2"/>
                                 </connections>
@@ -100,15 +95,14 @@
                         <constraints>
                             <constraint firstItem="XQQ-R9-sdw" firstAttribute="leading" secondItem="bAN-XY-UJJ" secondAttribute="leading" constant="20" id="0xs-gf-Qog"/>
                             <constraint firstItem="hVD-gi-KKX" firstAttribute="leading" secondItem="C1A-QU-Vxh" secondAttribute="leading" id="2eC-IW-Z8K"/>
-                            <constraint firstItem="O6g-Uj-Nhm" firstAttribute="top" secondItem="bAN-XY-UJJ" secondAttribute="top" id="2lE-FI-fCq"/>
                             <constraint firstItem="C1A-QU-Vxh" firstAttribute="bottom" secondItem="aWX-Hw-isC" secondAttribute="bottom" id="BmG-eN-j8Z"/>
                             <constraint firstItem="C1A-QU-Vxh" firstAttribute="trailing" secondItem="bAN-XY-UJJ" secondAttribute="trailing" id="D0W-Cw-e4n"/>
                             <constraint firstItem="hVD-gi-KKX" firstAttribute="trailing" secondItem="C1A-QU-Vxh" secondAttribute="trailing" id="E50-NS-dm4"/>
-                            <constraint firstItem="D0u-eN-LmE" firstAttribute="leading" secondItem="aWX-Hw-isC" secondAttribute="leading" constant="20" id="Lqk-Cr-scl"/>
+                            <constraint firstItem="D0u-eN-LmE" firstAttribute="leading" secondItem="bAN-XY-UJJ" secondAttribute="leading" constant="20" id="Lqk-Cr-scl"/>
                             <constraint firstItem="C1A-QU-Vxh" firstAttribute="top" secondItem="aWX-Hw-isC" secondAttribute="top" id="TEG-YT-oNE"/>
                             <constraint firstItem="hVD-gi-KKX" firstAttribute="top" secondItem="C1A-QU-Vxh" secondAttribute="top" id="cNB-Ba-Cg0"/>
                             <constraint firstItem="C1A-QU-Vxh" firstAttribute="leading" secondItem="bAN-XY-UJJ" secondAttribute="leading" id="cPH-qF-2At"/>
-                            <constraint firstItem="BuF-KZ-Ehw" firstAttribute="centerY" secondItem="bAN-XY-UJJ" secondAttribute="centerY" id="dqe-LZ-U0s"/>
+                            <constraint firstItem="BuF-KZ-Ehw" firstAttribute="centerY" secondItem="bAN-XY-UJJ" secondAttribute="centerY" constant="-30" id="dqe-LZ-U0s"/>
                             <constraint firstItem="D0u-eN-LmE" firstAttribute="top" secondItem="u6r-Pg-LqI" secondAttribute="bottom" constant="10" id="k0z-se-dSe"/>
                             <constraint firstItem="u6r-Pg-LqI" firstAttribute="centerX" secondItem="bAN-XY-UJJ" secondAttribute="centerX" id="lF5-iN-1bM"/>
                             <constraint firstItem="bAN-XY-UJJ" firstAttribute="bottom" secondItem="u6r-Pg-LqI" secondAttribute="bottom" constant="130" id="mFE-5y-Jek"/>
@@ -117,7 +111,6 @@
                             <constraint firstItem="bAN-XY-UJJ" firstAttribute="trailing" secondItem="D0u-eN-LmE" secondAttribute="trailing" constant="20" id="paU-bJ-CNg"/>
                             <constraint firstItem="bAN-XY-UJJ" firstAttribute="bottom" secondItem="D0u-eN-LmE" secondAttribute="bottom" constant="30" id="uDT-jy-9n9"/>
                             <constraint firstItem="XQQ-R9-sdw" firstAttribute="top" secondItem="bAN-XY-UJJ" secondAttribute="top" id="voB-ZC-kYQ"/>
-                            <constraint firstItem="bAN-XY-UJJ" firstAttribute="trailing" secondItem="O6g-Uj-Nhm" secondAttribute="trailing" constant="20" id="yWw-Cl-3nD"/>
                             <constraint firstItem="BuF-KZ-Ehw" firstAttribute="leading" secondItem="bAN-XY-UJJ" secondAttribute="leading" constant="44" id="zRC-3q-wvv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bAN-XY-UJJ"/>

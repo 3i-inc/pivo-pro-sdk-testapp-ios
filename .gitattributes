@@ -1,0 +1,10 @@
+Frameworks/PivoProSDK.framework/Frameworks/Realm.framework/Realm filter=lfs diff=lfs merge=lfs -text
+Frameworks/PivoProSDK.framework/Frameworks/RealmSwift.framework/RealmSwift filter=lfs diff=lfs merge=lfs -text
+Frameworks/PivoProSDK.framework/horseonly.mlmodelc/model0/model.espresso.weights filter=lfs diff=lfs merge=lfs -text
+Frameworks/PivoProSDK.framework/face.mlmodelc/model0/model.espresso.weights filter=lfs diff=lfs merge=lfs -text
+Frameworks/PivoProSDK.framework/MobileNetV2_SSDLite.mlmodelc/model0/model.espresso.weights filter=lfs diff=lfs merge=lfs -text
+Frameworks/PivoProSDK.framework/MobileNetV2_SSDLite.mlmodelc/model1/model.espresso.weights filter=lfs diff=lfs merge=lfs -text
+Frameworks/PivoProSDK.framework/Modules/PivoProSDK.swiftmodule/arm64-apple-ios.abi.json filter=lfs diff=lfs merge=lfs -text
+Frameworks/PivoProSDK.framework/persononly_v2.mlmodelc/model1/model.espresso.weights filter=lfs diff=lfs merge=lfs -text
+Frameworks/PivoProSDK.framework/persononly_v2.mlmodelc/model0/model.espresso.weights filter=lfs diff=lfs merge=lfs -text
+Frameworks/PivoProSDK.framework/PivoProSDK filter=lfs diff=lfs merge=lfs -text

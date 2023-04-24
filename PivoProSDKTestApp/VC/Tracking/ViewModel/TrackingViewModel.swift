@@ -26,7 +26,7 @@ class TrackingViewModel {
   
   var delegate: TrackingViewModelDelegate?
   
-  private var pivoSDK = PivoProSDK.shared
+  private var pivoSDK = PivoSDK.shared
   private var trackingType: TrackingType = .object
   private var trackingSensitivity: TrackingSensitivity = .normal
   
@@ -132,14 +132,6 @@ class TrackingViewModel {
     }
   }
   
-  func handleSaveButtonClicked() {
-    guard let image = self.image else {
-      return
-    }
-    
-    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-  }
-  
   private func startTracking(image: UIImage, boundingBox: CGRect?) {
     let imageSize = image.size
     let image = getImageBasedOnOrientation(image: image)
@@ -186,7 +178,7 @@ class TrackingViewModel {
     pivoSDK.updateTracking(image: image)
   }
   
-  private func stopTracking() {
+  func stopTracking() {
     pivoSDK.stopTracking()
     trackingState = .prepare
   }
